@@ -2,7 +2,16 @@ const sendMail = require("../Utils/Nodemailer");
 
 const SendEmail = async (req, res) => {
   try {
+    console.log("Received form data:", req.body);
     const { name, email, phone, company, message } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, email, and message are required fields",
+      });
+    }
 
     const subject = `New Inquiry from ${name}`;
 
@@ -16,7 +25,12 @@ const SendEmail = async (req, res) => {
       <p>${message}</p>
     `;
     
-    await sendMail(process.env.SMTP_USER, subject, htmlContent);
+    // Send email to the target recipient (you can set this in .env as TARGET_EMAIL)
+    const targetEmail = process.env.TARGET_EMAIL || process.env.SMTP_USER;
+    console.log("Sending email to:", targetEmail);
+    
+    await sendMail(targetEmail, subject, htmlContent);
+    console.log("Email sent successfully to:", targetEmail);
 
     return res.status(200).json({
       success: true,
@@ -27,6 +41,7 @@ const SendEmail = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to send email",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
