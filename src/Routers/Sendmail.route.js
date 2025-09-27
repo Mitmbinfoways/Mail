@@ -1,7 +1,8 @@
 const express = require("express");
 const SendmailRoute = express.Router();
-const { SendEmail } = require("../controller/Sendmail.controller");
+const { SendEmail, Newsletter } = require("../controller/Sendmail.controller");
 
 SendmailRoute.post("/", SendEmail);
+SendmailRoute.post("/newsletter", Newsletter);
 
 module.exports = SendmailRoute;
