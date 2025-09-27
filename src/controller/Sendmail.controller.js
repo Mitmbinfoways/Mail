@@ -3,7 +3,7 @@ const sendMail = require("../Utils/Nodemailer");
 const SendEmail = async (req, res) => {
   try {
     console.log("Received form data:", req.body);
-    const { name, email, phone, company, message } = req.body;
+    const { name, email, phone, company, message ,service } = req.body;
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -21,6 +21,7 @@ const SendEmail = async (req, res) => {
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phone}</p>
       <p><strong>Company:</strong> ${company}</p>
+      <p><strong>Service:</strong> ${service}</p>
       <p><strong>Message:</strong></p>
       <p>${message}</p>
     `;
