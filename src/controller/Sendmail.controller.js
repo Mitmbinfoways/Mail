@@ -26,11 +26,22 @@ const SendEmail = async (req, res) => {
     `;
 
     // Send email to the target recipient
-    const targetEmail = process.env.TARGET_EMAIL || process.env.SMTP_USER;
-    console.log("Sending email to:", targetEmail);
+    const targetEmail = process.env.SMTP_USER || "nexsaar@gmail.com";
 
     await sendMail(targetEmail, subject, htmlContent);
-    console.log("Email sent successfully to:", targetEmail);
+
+    const clientSubject = "Thank you for contacting us!";
+    const clientHtml = `
+      <h2>Hello ${name},</h2>
+      <p>Thank you for reaching out to us.</p>
+      <p>We have received your message and will connect with you soon.</p>
+      <p><strong>Your message:</strong></p>
+      <p>${message}</p>
+      <br/>
+      <p>Best regards,<br/>The Team</p>
+    `;
+
+    await sendMail(email, clientSubject, clientHtml);
 
     return res.status(200).json({
       success: true,
