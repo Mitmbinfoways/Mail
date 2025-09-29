@@ -30,15 +30,16 @@ const SendEmail = async (req, res) => {
 
     await sendMail(targetEmail, subject, htmlContent);
 
-    const clientSubject = "Thank you for contacting us!";
+    const clientSubject = "Thank you for contacting Nexsaar Technologies!";
     const clientHtml = `
-      <h2>Hello ${name},</h2>
-      <p>Thank you for reaching out to us.</p>
-      <p>We have received your message and will connect with you soon.</p>
-      <p><strong>Your message:</strong></p>
-      <p>${message}</p>
+      <p>Dear ${name},</p>
+      <p>Greetings from <strong>Nexsaar Technologies</strong>!</p>
+      <p>Thank you so much for reaching out to us. We confirm that your message, submitted through our website's Contact Us form, has been successfully received.</p>
+      <p>We understand that you're looking for solutions, and our priority is to connect you with the right expertise. Our dedicated Customer Care Team is currently reviewing your inquiry to ensure the most knowledgeable specialist follows up.</p>
+      <p>You can expect a personalized response within <strong>24 business hours</strong>. We look forward to addressing your request and starting a conversation about how we can best assist you.</p>
+      <p>We look forward to serving you.</p>
       <br/>
-      <p>Best regards,<br/>The Team</p>
+      <p>Sincerely,<br/>Customer Care Team,<br/>Nexsaar Technologies</p>
     `;
 
     await sendMail(email, clientSubject, clientHtml);
