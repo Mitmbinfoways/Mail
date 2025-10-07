@@ -5,10 +5,10 @@ const SendEmail = async (req, res) => {
     const { name, email, phone, company, message, service } = req.body;
 
     // Validate required fields
-    if (!name || !email || !message) {
+    if (!name || !email) {
       return res.status(400).json({
         success: false,
-        message: "Name, email, and message are required fields",
+        message: "Name and email are required fields",
       });
     }
 
